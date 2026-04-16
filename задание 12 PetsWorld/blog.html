@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Блог о здоровом питании - PetsWorld</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F9F3E9;
+            color: #2C1810;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #C44536;
+            text-decoration: none;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav__link:hover, .nav__link.active {
+            color: #C44536;
+            border-bottom: 2px solid #C44536;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search {
+            padding: 8px 16px;
+            border: 1px solid #E8DCCC;
+            border-radius: 40px;
+            background: #FEFCF8;
+            outline: none;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon-img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .cart-count {
+            background: #C44536;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: -10px;
+            right: -12px;
+        }
+
+        /* Burger */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background: #2C1810;
+            border-radius: 3px;
+        }
+
+        .burger.active span {
+            background: #C44536;
+        }
+
+        /* Hero блога */
+        .page-hero {
+            background: linear-gradient(135deg, #F9F3E9 0%, #EFE3D4 100%);
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 40px;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            color: #2C1810;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            color: #5E4B3C;
+            margin-top: 10px;
+        }
+
+        /* Сетка блога */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            margin: 40px 0 60px;
+        }
+
+        /* Карточка блога */
+        .blog-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .blog-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .blog-card-content {
+            padding: 25px;
+        }
+
+        .blog-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #2C1810;
+        }
+
+        .blog-card .date {
+            font-size: 13px;
+            color: #C44536;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .date-icon {
+            width: 14px;
+            height: 14px;
+        }
+
+        .blog-card p {
+            color: #5E4B3C;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .read-more {
+            color: #C44536;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 12px;
+            color: #A83527;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C1810;
+            color: #F9F3E9;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer__container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer__col h3, .footer__col h4 {
+            margin-bottom: 15px;
+            color: #C44536;
+        }
+
+        .footer__col ul {
+            list-style: none;
+        }
+
+        .footer__col li {
+            margin-bottom: 8px;
+        }
+
+        .footer__col a {
+            color: #F9F3E9;
+            text-decoration: none;
+        }
+
+        .footer__col a:hover {
+            color: #C44536;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials a img {
+            width: 28px;
+            height: 28px;
+            transition: 0.3s;
+        }
+
+        .socials a img:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #5E4B3C;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                order: 3;
+            }
+
+            .nav.active {
+                display: block;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+            }
+
+            .header__actions {
+                order: 2;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (min-width: 756px) and (max-width: 1024px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="index.html" class="logo">PetsWorld</a>
+            
+            <button class="burger" id="burgerBtn">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav" id="navMenu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav__link">Каталог</a></li>
+                    <li><a href="blog.html" class="nav__link active">Блог</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <input type="text" class="search" placeholder="Поиск...">
+                <div class="cart-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Корзина" class="cart-icon-img">
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>Блог о здоровом питании</h1>
+                <p>Советы ветеринаров и экспертов по кормлению ваших питомцев</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="blog-grid">
+                <!-- Статья 1 -->
+                <article class="blog-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=b5759c0e1f7c95b991e86d4b8ad4ab17_l-5484664-images-thumbs&n=13" alt="Омега-3 для собак">
+                    <div class="blog-card-content">
+                        <h3>Омега-3 в рационе собаки: почему это важно для шерсти и суставов</h3>
+                        <p class="date">
+                            12 апреля 2026
+                        </p>
+                        <p>Жирные кислоты Омега-3 необходимы для здоровья кожи, блеска шерсти и подвижности суставов. Рассказываем, в каких продуктах искать и как правильно давать питомцу.</p>
+                        <a href="article.html" class="read-more">Читать далее -> </a>
+                    </div>
+                </article>
+
+                <!-- Статья 2 -->
+                <article class="blog-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=1aa803ee4676204f5145a8d218d6a98e_l-4841962-images-thumbs&n=13" alt="Овощи для собак">
+                    <div class="blog-card-content">
+                        <h3>Какие овощи можно давать собаке, а какие под запретом</h3>
+                        <p class="date">
+                             28 марта 2026
+                        </p>
+                        <p>Морковь, брокколи, огурцы — полезно, а лук, виноград и авокадо — смертельно опасно. Полный список разрешённых и запрещённых овощей для собак.</p>
+                        <a href="article.html" class="read-more">Читать далее -> </a>
+                    </div>
+                </article>
+
+                <!-- Статья 3 -->
+                <article class="blog-card">
+                    <img src="https://avatars.mds.yandex.net/i?id=19541fdb6bdfc95551c3d916a9025b38_l-6637734-images-thumbs&n=13" alt="Сухой или влажный корм">
+                    <div class="blog-card-content">
+                        <h3>Сухой vs влажный корм: что выбрать для здоровья кошки</h3>
+                        <p class="date">
+                            15 марта 2026
+                        </p>
+                        <p>Разбираем плюсы и минусы двух типов кормов, сравниваем состав, влияние на зубы и пищеварение кошек. Помогаем сделать правильный выбор.</p>
+                        <a href="article.html" class="read-more">Читать далее -> </a>
+                    </div>
+                </article>
+            </div>
+         </div>
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3>PetsWorld</h3>
+                <p>Забота о питомцах с любовью с 2010 года.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Соцсети</h4>
+                <div class="socials">
+                    <a href="#"><img src="https://images.icon-icons.com/808/PNG/512/vk_icon-icons.com_66102.png" alt="вк"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/2429/PNG/512/telegram_logo_icon_147228.png" alt="тг"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/1211/PNG/512/1491580635-yumminkysocialmedia26_83102.png" alt="инст"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>© <span class="current-year"></span> PetsWorld.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.querySelector('.current-year').textContent = new Date().getFullYear();
+
+        let cartCount = 0;
+        const cartCounter = document.querySelector('.cart-count');
+        const cartIcon = document.querySelector('.cart-icon');
+
+        if (cartIcon) {
+            cartIcon.addEventListener('click', function() {
+                alert('Ваша корзина. Товаров: ' + cartCount);
+            });
+        }
+
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                burgerBtn.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

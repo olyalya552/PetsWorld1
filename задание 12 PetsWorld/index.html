@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetsWorld - Зоотовары</title>
+    <link rel="stylesheet" href="style.css">
+    <script scr="script.js"></script>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="index.html" class="logo">PetsWorld</a>
+            
+            <button class="burger" id="burgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav class="nav" id="navMenu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link active">Главная</a></li>
+                    <li><a href="catalog.html" class="nav__link">Каталог</a></li>
+                    <li><a href="blog.html" class="nav__link">Блог</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <input type="text" class="search" placeholder="Поиск...">
+                <div class="cart-icon" id="cartIcon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/263/263142.png" alt="Корзина" class="cart-icon-img">
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="hero__title">Всё для счастливой жизни ваших питомцев</h1>
+                <p class="hero__subtitle">Корма, игрушки, домики и ветаптека — только проверенные бренды</p>
+                <a href="catalog.html" class="btn btn--primary">В каталог</a>
+            </div>
+        </section>
+
+        <section class="benefits">
+            <div class="container">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <div class="benefits__grid">
+                    <div class="benefit-card">
+                        <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="Иконка качества" class="benefit-icon">
+                        <h3>Только качество</h3>
+                        <p>Сертифицированные корма премиум-класса</p>
+                    </div>
+                    <div class="benefit-card">
+                        <img src="https://images.icon-icons.com/1849/PNG/512/fast-delivery_116471.png" alt="Иконка доставки" class="benefit-icon">
+                        <h3>Быстрая доставка</h3>
+                        <p>По Санкт-Петербургу за 1 день</p>
+                    </div>
+                    <div class="benefit-card">
+                        <img src="https://images.icon-icons.com/587/PNG/96/cup_icon-icons.com_55322.png" alt="Иконка опыта" class="benefit-icon">
+                        <h3>Опыт 10+ лет</h3>
+                        <p>Советы профессиональных ветеринаров</p>
+                    </div>
+                    <div class="benefit-card">
+                        <img src="https://images.icon-icons.com/317/PNG/96/gift-icon_34411.png" alt="Иконка кешбека" class="benefit-icon">
+                        <h3>Кешбек 5%</h3>
+                        <p>Бонусы на следующий заказ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="popular">
+            <div class="container">
+                <h2 class="section-title">Популярные товары</h2>
+                <div class="products-grid">
+                    <div class="product-card" data-name="Корм Brit Premium для собак">
+                        <img src="https://avatars.mds.yandex.net/get-mpic/9737239/2a0000018c34d65336c55625bd8f7493843d/orig" alt="Корм Brit Premium для собак">
+                        <h3>Корм Brit Premium (собаки)</h3>
+                        <p class="price">2 490 ₽</p>
+                        <a href="product.html" class="btn btn--outline">Подробнее</a>
+                        <button class="btn btn--primary add-to-cart">В корзину</button>
+                    </div>
+                    <div class="product-card" data-name="Игрушка-пищалка">
+                        <img src="https://img-edg.joomcdn.net/833294f324b0d755abdf411674992c6fcb6a6344_original.jpeg" alt="Игрушка-пищалка для собак">
+                        <h3>Игрушка-пищалка</h3>
+                        <p class="price">450 ₽</p>
+                        <a href="product.html" class="btn btn--outline">Подробнее</a>
+                        <button class="btn btn--primary add-to-cart">В корзину</button>
+                    </div>
+                    <div class="product-card" data-name="Наполнитель для туалета">
+                        <img src="https://basket-06.wbbasket.ru/vol1011/part101170/101170937/images/big/1.webp" alt="Наполнитель комкующийся для кошек">
+                        <h3>Наполнитель комкующийся</h3>
+                        <p class="price">890 ₽</p>
+                        <a href="product.html" class="btn btn--outline">Подробнее</a>
+                        <button class="btn btn--primary add-to-cart">В корзину</button>
+                    </div>
+                </div>
+                <div style="text-align: center; margin: 20px 0 70px;">
+                    <a href="catalog.html" class="btn btn--primary">Смотреть все товары </a>
+                </div>
+            </div>
+        </section>
+<section class="pet-test">
+  <h2><img src="https://images.icon-icons.com/510/PNG/512/ios7-paw_icon-icons.com_50209.png" alt="лапа" width="28" >Какой питомец вам подходит?</h2>
+  <p>Ответьте на 3 вопроса и узнайте идеальную породу</p>
+
+  <form id="pet-test-form">
+    <div class="quiz-question">
+      <p>1. Сколько времени вы готовы уделять питомцу в день?</p>
+      <label><input type="radio" name="q1" value="low"> Меньше 1 часа</label>
+      <label><input type="radio" name="q1" value="medium"> 1–3 часа</label>
+      <label><input type="radio" name="q1" value="high"> Больше 3 часов</label>
+    </div>
+
+    <div class="quiz-question">
+      <p>2. Где вы живёте?</p>
+      <label><input type="radio" name="q2" value="flat"> Маленькая квартира</label>
+      <label><input type="radio" name="q2" value="house"> Большой дом</label>
+    </div>
+
+    <div class="quiz-question">
+      <p>3. Что для вас важнее?</p>
+      <label><input type="radio" name="q3" value="calm"> Спокойствие и уют</label>
+      <label><input type="radio" name="q3" value="active"> Активность и игры</label>
+    </div>
+
+    <button type="submit">Узнать породу</button>
+  </form>
+
+  <div id="quiz-result" style="display: none;">
+    <h3><img src="https://images.icon-icons.com/1077/PNG/512/star_77949.png" alt="звезда" width="28" >Вам подходит:</h3>
+    <p id="breed-name"></p>
+    <p id="breed-desc"></p>
+  </div>
+</section>
+
+<script src="script.js"></script>
+        <section class="promo">
+            <div class="container">
+                <h2>Подпишись и получи скидку 10%</h2>
+                <p>Будьте в курсе акций и новинок для ваших питомцев</p>
+                <form class="subscribe-form" id="subscribeForm">
+                    <input type="email" placeholder="Ваш email" required>
+                    <button type="submit" class="btn btn--primary">Подписаться</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3>PetsWorld</h3>
+                <p>Забота о питомцах с любовью с 2010 года.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Соцсети</h4>
+                <div class="socials">
+                    <a href="#"><img src="https://images.icon-icons.com/808/PNG/512/vk_icon-icons.com_66102.png" alt="вк" width="28"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/2429/PNG/512/telegram_logo_icon_147228.png" alt="тг" width="28"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/1211/PNG/512/1491580635-yumminkysocialmedia26_83102.png" alt="инстаграм" width="28"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>© <span class="current-year"></span> PetsWorld.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Бургер-меню
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                burgerBtn.classList.toggle('active');
+            });
+        }
+
+        // Корзина
+        let cartCount = 0;
+        const cartCounter = document.querySelector('.cart-count');
+
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const card = btn.closest('.product-card');
+                const productName = card ? (card.dataset.name || card.querySelector('h3').innerText) : 'Товар';
+                cartCount++;
+                if (cartCounter) {
+                    cartCounter.textContent = cartCount;
+                }
+                alert(productName + ' добавлен в корзину!');
+            });
+        });
+
+        // Подписка
+        const subForm = document.getElementById('subscribeForm');
+        if (subForm) {
+            subForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Спасибо за подписку! Скидка 10% ждёт вас на почте');
+                subForm.reset();
+            });
+        }
+        
+        // Иконка корзины - переход на страницу корзины
+        const cartIcon = document.getElementById('cartIcon');
+        if (cartIcon) {
+            cartIcon.addEventListener('click', () => {
+                alert('Ваша корзина. Товаров: ' + cartCount);
+            });
+        }
+    </script>
+</body>
+</html>

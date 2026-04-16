@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - PetsWorld</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background: #F9F3E9;
+            color: #2C1810;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #C44536;
+            text-decoration: none;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav__link:hover, .nav__link.active {
+            color: #C44536;
+            border-bottom: 2px solid #C44536;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search {
+            padding: 8px 16px;
+            border: 1px solid #E8DCCC;
+            border-radius: 40px;
+            background: #FEFCF8;
+            outline: none;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon-img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .cart-count {
+            background: #C44536;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: -10px;
+            right: -12px;
+        }
+
+        /* Burger*/
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background: #2C1810;
+            border-radius: 3px;
+        }
+
+        .burger.active span {
+            background: #C44536;
+        }
+
+        /* Hero каталога */
+        .page-hero {
+            background: linear-gradient(135deg, #F9F3E9 0%, #EFE3D4 100%);
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 40px;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            color: #2C1810;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            color: #5E4B3C;
+            margin-top: 10px;
+        }
+
+        /* Layout каталога */
+        .catalog-layout {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        /* Фильтры (сайдбар) */
+        .filters {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            width: 250px;
+            height: fit-content;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .filters h3 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #C44536;
+        }
+
+        .filter-list {
+            list-style: none;
+        }
+
+        .filter-list li {
+            margin-bottom: 12px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            width: 100%;
+            text-align: left;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s;
+            color: #2C1810;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-btn:hover {
+            background: #F9F3E9;
+        }
+
+        .filter-btn.active {
+            background: #C44536;
+            color: white;
+        }
+
+        .filter-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Сетка товаров */
+        .catalog-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* Карточка товара */
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            font-size: 18px;
+            margin: 15px 0 5px;
+            padding: 0 15px;
+        }
+
+        .product-card .description {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #C44536;
+            margin: 10px 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+            margin: 5px;
+        }
+
+        .btn--primary {
+            background: #C44536;
+            color: white;
+        }
+
+        .btn--primary:hover {
+            background: #A83527;
+        }
+
+        .btn--outline {
+            background: transparent;
+            border: 2px solid #C44536;
+            color: #C44536;
+        }
+
+        .btn--outline:hover {
+            background: #C44536;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C1810;
+            color: #F9F3E9;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer__container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer__col h3, .footer__col h4 {
+            margin-bottom: 15px;
+            color: #C44536;
+        }
+
+        .footer__col ul {
+            list-style: none;
+        }
+
+        .footer__col li {
+            margin-bottom: 8px;
+        }
+
+        .footer__col a {
+            color: #F9F3E9;
+            text-decoration: none;
+        }
+
+        .footer__col a:hover {
+            color: #C44536;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials a img {
+            width: 28px;
+            height: 28px;
+            transition: 0.3s;
+        }
+
+        .socials a img:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #5E4B3C;
+        }
+
+        /* Адаптив */
+        @media (max-width: 600px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                order: 3;
+            }
+
+            .nav.active {
+                display: block;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+            }
+
+            .header__actions {
+                order: 2;
+            }
+
+            .catalog-layout {
+                flex-direction: column;
+            }
+
+            .filters {
+                width: 100%;
+            }
+
+            .catalog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .catalog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="index.html" class="logo">PetsWorld</a>
+            
+            <button class="burger" id="burgerBtn">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav" id="navMenu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav__link active">Каталог</a></li>
+                    <li><a href="blog.html" class="nav__link">Блог</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <input type="text" class="search" placeholder="Поиск...">
+                <div class="cart-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Корзина" class="cart-icon-img">
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>Каталог товаров</h1>
+                <p>Всё для здоровья и счастья ваших питомцев</p>
+            </div>
+        </section>
+
+        <div class="container catalog-layout">
+            <aside class="filters">
+                <h3>Категории</h3>
+                <ul class="filter-list">
+                    <li><button class="filter-btn active" data-cat="all">
+                        <img src="https://images.icon-icons.com/1603/PNG/512/pet-animal-pets-paw-dog-cat-paws_108559.png"="Все" class="filter-icon"> Все товары
+                    </button></li>
+                    <li><button class="filter-btn" data-cat="cats">
+                        <img src="https://images.icon-icons.com/1055/PNG/128/11-gift-cat_icon-icons.com_76687.png" alt="Кошки" class="filter-icon"> Для кошек
+                    </button></li>
+                    <li><button class="filter-btn" data-cat="dogs">
+                        <img src="https://images.icon-icons.com/85/PNG/128/chihuahua_bone_dog_animal_15961.png" alt="Собаки" class="filter-icon"> Для собак
+                    </button></li>
+                    <li><button class="filter-btn" data-cat="rodents">
+                        <img src="https://images.icon-icons.com/2313/PNG/512/rabbit_bunny_animal_wildlife_mammal_rodent_icon_141989.png" alt="Грызуны" class="filter-icon"> Для грызунов
+                    </button></li>
+                    <li><button class="filter-btn" data-cat="veterinary">
+                        <img src="https://images.icon-icons.com/4473/PNG_WM/256/272314_pills-bottle-icon.png" alt="Ветаптека" class="filter-icon"> Ветаптека
+                    </button></li>
+                </ul>
+            </aside>
+
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Товары будут добавлены через JS -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3>PetsWorld</h3>
+                <p>Забота о питомцах с любовью с 2010 года.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Соцсети</h4>
+                <div class="socials">
+                    <a href="#"><img src="https://images.icon-icons.com/808/PNG/512/vk_icon-icons.com_66102.png" alt="вк"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/2429/PNG/512/telegram_logo_icon_147228.png" alt="тг"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/1211/PNG/512/1491580635-yumminkysocialmedia26_83102.png" alt="инст"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>© <span class="current-year"></span> PetsWorld.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Текущий год
+        document.querySelector('.current-year').textContent = new Date().getFullYear();
+
+        // Данные товаров
+        const products = [
+            { name: "Корм Royal Canin (кошки)", price: "2 890 ₽", desc: "Вес: 2 кг", category: "cats", img: "https://main-cdn.sbermegamarket.ru/big2/hlr-system/105/142/553/910/241/56/600012507633b0.jpg" },
+            { name: "Корм Purina Pro Plan (собаки)", price: "3 490 ₽", desc: "Вес: 2.5 кг", category: "dogs", img: "https://catalog-cdn.detmir.st/media/aWktOpiFCb6adSBLbhv0m4ICHG74hGkoEMifXSXX40c=.jpeg" },
+            { name: "Наполнитель древесный", price: "590 ₽", desc: "8 л, прессованный", category: "rodents", img: "https://avatars.mds.yandex.net/get-mpic/12456181/2a000001962f75a83ce6225125c2bed8a0ed/orig" },
+            { name: "Когтеточка-домик", price: "3 200 ₽", desc: "Высота 50 см", category: "cats", img: "https://main-cdn.sbermegamarket.ru/big1/hlr-system/-56/204/274/942/822/25/600010910444b0.jpeg" },
+            { name: "Игрушка-канат", price: "350 ₽", desc: "Для активных собак", category: "dogs", img: "https://static.onlinetrade.ru/img/items/b/igrushka_dlya_sobak_homepet_kanat_s_uzlami_90_g_25_sm_1614930006_1.jpg" },
+            { name: "Витамины для шерсти", price: "890 ₽", desc: "30 таблеток", category: "veterinary", img: "https://static.onlinetrade.ru/img/items/m/vitaminy_kvant_mkb_quot_sherstevit_quot_dlya_sobak_i_koshek_dlya_stimulyatsii_rosta_sherstyanogo_pokrova_120_tabletok_1621327695_1.jpg" },
+            { name: "Колесо для бега", price: "1 990 ₽", desc: "Для хомяков и крыс", category: "rodents", img: "https://avatars.mds.yandex.net/i?id=5e3cf7ff0758fa1942347f179b2d23d0_l-4580242-images-thumbs&n=13" },
+            { name: "Капли от блох", price: "450 ₽", desc: "Для кошек", category: "veterinary", img: "https://static.zdravcity.ru/upload/iblock/4ff/photo_es_2739ABD8-803F-8836-FE06-3DE0A030A0A6.jpg" }
+        ];
+
+        const catalogGrid = document.getElementById('catalogGrid');
+        let cartCount = 0;
+        const cartCounter = document.querySelector('.cart-count');
+
+        // Функция отображения товаров
+        function renderProducts(filterCategory = 'all') {
+            const filtered = products.filter(p => filterCategory === 'all' || p.category === filterCategory);
+            
+            catalogGrid.innerHTML = filtered.map(product => `
+                <div class="product-card" data-name="${product.name}" data-category="${product.category}">
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p class="description">${product.desc}</p>
+                    <p class="price">${product.price}</p>
+                    <button class="btn btn--outline" onclick="window.location.href='product.html'">Подробнее</button>
+                    <button class="btn btn--primary add-to-cart">В корзину</button>
+                </div>
+            `).join('');
+
+            // Перепривязываем события к корзине
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const card = btn.closest('.product-card');
+                    const productName = card.dataset.name;
+                    cartCount++;
+                    cartCounter.textContent = cartCount;
+                    alert(productName + ' добавлен в корзину!');
+                });
+            });
+        }
+
+        // Фильтрация
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const category = btn.dataset.cat;
+                renderProducts(category);
+            });
+        });
+
+        // Бургер-меню 
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                burgerBtn.classList.toggle('active');
+            });
+        }
+
+        // Загружаем все товары
+        renderProducts('all');
+    </script>
+</body>
+</html>

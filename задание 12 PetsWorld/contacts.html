@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - PetsWorld</title>
+    <link rel="stylesheet" href="style.css"> 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F9F3E9;
+            color: #2C1810;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #C44536;
+            text-decoration: none;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav__link:hover, .nav__link.active {
+            color: #C44536;
+            border-bottom: 2px solid #C44536;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search {
+            padding: 8px 16px;
+            border: 1px solid #E8DCCC;
+            border-radius: 40px;
+            background: #FEFCF8;
+            outline: none;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon-img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .cart-count {
+            background: #C44536;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: -10px;
+            right: -12px;
+        }
+
+        /* Burger */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background: #2C1810;
+            border-radius: 3px;
+        }
+
+        .burger.active span {
+            background: #C44536;
+        }
+
+        /* Hero контактов */
+        .page-hero {
+            background: linear-gradient(135deg, #F9F3E9 0%, #EFE3D4 100%);
+            text-align: center;
+            padding: 50px 20px;
+            margin-bottom: 40px;
+        }
+
+        .page-hero h1 {
+            font-size: 42px;
+            color: #2C1810;
+        }
+
+        .page-hero p {
+            font-size: 18px;
+            color: #5E4B3C;
+            margin-top: 10px;
+        }
+
+        /* Сетка контактов */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 40px 0 60px;
+        }
+
+        /* Информационная карточка */
+        .contact-info {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .contact-info h3 {
+            font-size: 24px;
+            color: #C44536;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F0E4D8;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 10px 0;
+        }
+
+        .contact-icon {
+            width: 28px;
+            height: 28px;
+        }
+
+        .contact-item p {
+            font-size: 16px;
+            color: #2C1810;
+        }
+
+        .work-hours {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #F0E4D8;
+        }
+
+        .work-hours h4 {
+            color: #C44536;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .work-hours p {
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #5E4B3C;
+        }
+
+        /* Форма */
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .contact-form h3 {
+            font-size: 24px;
+            color: #C44536;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F0E4D8;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #E8DCCC;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 16px;
+            background: #FEFCF8;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #C44536;
+            box-shadow: 0 0 0 3px rgba(196,69,54,0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn--primary {
+            background: #C44536;
+            color: white;
+            width: 100%;
+        }
+
+        .btn--primary:hover {
+            background: #A83527;
+            transform: translateY(-2px);
+        }
+
+        /* Карта */
+        .map-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .map-card h3 {
+            font-size: 24px;
+            color: #C44536;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F0E4D8;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 400px;
+            width: 90%;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #C44536;
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content h2 {
+            color: #C44536;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            color: #5E4B3C;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            background: #C44536;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .modal-btn:hover {
+            background: #A83527;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C1810;
+            color: #F9F3E9;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer__container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer__col h3, .footer__col h4 {
+            margin-bottom: 15px;
+            color: #C44536;
+        }
+
+        .footer__col ul {
+            list-style: none;
+        }
+
+        .footer__col li {
+            margin-bottom: 8px;
+        }
+
+        .footer__col a {
+            color: #F9F3E9;
+            text-decoration: none;
+        }
+
+        .footer__col a:hover {
+            color: #C44536;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials a img {
+            width: 28px;
+            height: 28px;
+            transition: 0.3s;
+        }
+
+        .socials a img:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #5E4B3C;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                order: 3;
+            }
+
+            .nav.active {
+                display: block;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+            }
+
+            .header__actions {
+                order: 2;
+            }
+
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-hero h1 {
+                font-size: 32px;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .contacts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="index.html" class="logo">PetsWorld</a>
+            
+            <button class="burger" id="burgerBtn">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav" id="navMenu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav__link">Каталог</a></li>
+                    <li><a href="blog.html" class="nav__link">Блог</a></li>
+                    <li><a href="contacts.html" class="nav__link active">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <input type="text" class="search" placeholder="Поиск...">
+                <div class="cart-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Корзина" class="cart-icon-img">
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero">
+            <div class="container">
+                <h1>Контакты</h1>
+                <p>Мы всегда рады помочь вам и вашим питомцам</p>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="contacts-grid">
+                <!-- Информация о контактах -->
+                <div class="contact-info">
+                    <h3>Свяжитесь с нами</h3>
+                    <div class="contact-item">
+                        <img src="https://cdn-icons-png.flaticon.com/128/535/535239.png" alt="Адрес" class="contact-icon">
+                        <p>Санкт-Петербург, пр-кт. Энгельса, 23</p>
+                    </div>
+                    <div class="contact-item">
+                        <img src="https://images.icon-icons.com/614/PNG/512/phone-volume_icon-icons.com_56474.png" alt="Телефон" class="contact-icon">
+                        <p>+7 (912) 345-67-89</p>
+                    </div>
+                    <div class="contact-item">
+                        <img src="https://images.icon-icons.com/614/PNG/512/mail-black-envelope-symbol_icon-icons.com_56519.png" alt="Email" class="contact-icon">
+                        <p>petsworld@mail.ru</p>
+                    </div>
+                    <div class="work-hours">
+                        <h4>Режим работы</h4>
+                        <p>Пн-Пт: 10:00 - 20:00</p>
+                        <p>Сб-Вс: 10:00 - 18:00</p>
+                    </div>
+                </div>
+
+                <!-- Форма обратной связи -->
+                <form class="contact-form" id="contactForm">
+                    <h3>Напишите нам</h3>
+                    <div class="form-group">
+                        <input type="text" placeholder="Ваше имя" required id="userName">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Ваш Email" required id="userEmail">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Ваше сообщение" required id="userMessage"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Отправить сообщение</button>
+                </form>
+
+                <!-- Карта -->
+                <div class="map-card">
+                    <h3>Мы на карте</h3>
+                    <div class="map-container">
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2372.058680409502!2d30.32748561989632!3d60.00420378281762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46963475ee23888d%3A0x4bceadfd8a8c0ce!2z0JjQvdGB0YLQuNGC0YPRgiDRgdGA0LXQtNC90LXQs9C-INC_0YDQvtGE0LXRgdGB0LjQvtC90LDQu9GM0L3QvtCz0L4g0L7QsdGA0LDQt9C-0LLQsNC90LjRjw!5e0!3m2!1sru!2sru!4v1776151645091!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img src="https://cdn-icons-png.flaticon.com/128/190/190411.png" alt="Успех" class="modal-icon">
+            <h2>Спасибо!</h2>
+            <p>Ваше сообщение отправлено. Мы свяжемся с вами в ближайшее время.</p>
+            <button class="modal-btn" id="modalCloseBtn">Хорошо</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3>PetsWorld</h3>
+                <p>Забота о питомцах с любовью с 2010 года.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Соцсети</h4>
+                <div class="socials">
+                    <a href="#"><img src="https://images.icon-icons.com/808/PNG/512/vk_icon-icons.com_66102.png" alt="вк"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/2429/PNG/512/telegram_logo_icon_147228.png" alt="тг"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/1211/PNG/512/1491580635-yumminkysocialmedia26_83102.png" alt="инст"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>© <span class="current-year"></span> PetsWorld.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Текущий год
+        document.querySelector('.current-year').textContent = new Date().getFullYear();
+
+        // Корзина
+        let cartCount = 0;
+        const cartCounter = document.querySelector('.cart-count');
+        const cartIcon = document.querySelector('.cart-icon');
+
+        if (cartIcon) {
+            cartIcon.addEventListener('click', function() {
+                alert('Ваша корзина. Товаров: ' + cartCount);
+            });
+        }
+
+        // Бургер-меню
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                burgerBtn.classList.toggle('active');
+            });
+        }
+
+        // Модальное окно
+        const modal = document.getElementById('modal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalCloseSpan = document.querySelector('.modal-close');
+
+        function openModal() {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeModal);
+        }
+        if (modalCloseSpan) {
+            modalCloseSpan.addEventListener('click', closeModal);
+        }
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Отправка формы
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('userName').value;
+                const email = document.getElementById('userEmail').value;
+                const message = document.getElementById('userMessage').value;
+                
+                if (name && email && message) {
+                    openModal();
+                    contactForm.reset();
+                } else {
+                    alert('Пожалуйста, заполните все поля');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

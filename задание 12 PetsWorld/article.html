@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Омега-3 в рационе собаки: почему это важно - PetsWorld</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F9F3E9;
+            color: #2C1810;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #C44536;
+            text-decoration: none;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav__link:hover, .nav__link.active {
+            color: #C44536;
+            border-bottom: 2px solid #C44536;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search {
+            padding: 8px 16px;
+            border: 1px solid #E8DCCC;
+            border-radius: 40px;
+            background: #FEFCF8;
+            outline: none;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon-img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .cart-count {
+            background: #C44536;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: -10px;
+            right: -12px;
+        }
+
+        /* Burger */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background: #2C1810;
+            border-radius: 3px;
+        }
+
+        .burger.active span {
+            background: #C44536;
+        }
+
+        /* Хлебные крошки */
+        .breadcrumbs {
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: #C44536;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: #888;
+        }
+
+        /* Статья */
+        .article-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 60px;
+        }
+
+        .article-main {
+            flex: 3;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .article-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #F0E4D8;
+        }
+
+        .article-header h1 {
+            font-size: 36px;
+            color: #2C1810;
+            margin-bottom: 15px;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .article-content h2 {
+            font-size: 26px;
+            color: #C44536;
+            margin: 30px 0 15px;
+        }
+
+        .article-content h3 {
+            font-size: 20px;
+            color: #2C1810;
+            margin: 20px 0 10px;
+        }
+
+        .article-content p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .article-content ul, .article-content ol {
+            margin: 15px 0 20px 25px;
+        }
+
+        .article-content li {
+            margin-bottom: 8px;
+        }
+
+        .article-image {
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .article-image img {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+        }
+
+        .image-caption {
+            font-size: 13px;
+            color: #888;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .fact-box {
+            background: #F9F3E9;
+            border-left: 4px solid #C44536;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .fact-box h4 {
+            color: #C44536;
+            margin-bottom: 10px;
+        }
+
+        /* Боковая панель */
+        .article-sidebar {
+            flex: 1;
+        }
+
+        .sidebar-widget {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .sidebar-widget h3 {
+            font-size: 20px;
+            color: #C44536;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #F0E4D8;
+        }
+
+        .related-list {
+            list-style: none;
+        }
+
+        .related-list li {
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px solid #F0E4D8;
+        }
+
+        .related-list a {
+            color: #2C1810;
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+        }
+
+        .related-list a:hover {
+            color: #C44536;
+            padding-left: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C1810;
+            color: #F9F3E9;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer__container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer__col h3, .footer__col h4 {
+            margin-bottom: 15px;
+            color: #C44536;
+        }
+
+        .footer__col ul {
+            list-style: none;
+        }
+
+        .footer__col li {
+            margin-bottom: 8px;
+        }
+
+        .footer__col a {
+            color: #F9F3E9;
+            text-decoration: none;
+        }
+
+        .footer__col a:hover {
+            color: #C44536;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials a img {
+            width: 28px;
+            height: 28px;
+            transition: 0.3s;
+        }
+
+        .socials a img:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #5E4B3C;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                order: 3;
+            }
+
+            .nav.active {
+                display: block;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+            }
+
+            .header__actions {
+                order: 2;
+            }
+
+            .article-main {
+                padding: 25px;
+            }
+
+            .article-header h1 {
+                font-size: 28px;
+            }
+
+            .article-content h2 {
+                font-size: 22px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .article-container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="index.html" class="logo">PetsWorld</a>
+            
+            <button class="burger" id="burgerBtn">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav" id="navMenu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav__link">Каталог</a></li>
+                    <li><a href="blog.html" class="nav__link active">Блог</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <input type="text" class="search" placeholder="Поиск...">
+                <div class="cart-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Корзина" class="cart-icon-img">
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> / 
+                <a href="blog.html">Блог</a> / 
+                <span>Омега-3 в рационе собаки: почему это важно для шерсти и суставов</span>
+            </div>
+
+            <div class="article-container">
+                <article class="article-main">
+                    <div class="article-header">
+                        <h1>Омега-3 в рационе собаки: почему это важно для шерсти и суставов</h1>
+                        <div class="article-meta">
+                            <div class="meta-item">
+                                 12 апреля 2026
+                            </div>
+                            <div class="meta-item">
+                                <img src="https://images.icon-icons.com/1879/PNG/512/iconfinder-11-avatar-2754576_120520.png" alt="Автор" class="meta-icon">
+                                Анна Ветрова
+                            </div>
+                            <div class="meta-item">
+                                <img src="https://images.icon-icons.com/692/PNG/512/seo-social-web-network-internet_232_icon-icons.com_61542.png" alt="Просмотры" class="meta-icon">
+                                2 847 просмотров
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="article-content">
+                        <p>Омега-3 жирные кислоты — это незаменимые питательные вещества, которые играют ключевую роль в здоровье собаки. Они не вырабатываются организмом самостоятельно, поэтому должны поступать с пищей. В этой статье я, ветеринарный диетолог Анна Ветрова, расскажу о пяти фактах, почему Омега-3 так важна для вашего питомца.</p>
+
+                        <div class="article-image">
+                            <img src="https://avatars.mds.yandex.net/i?id=3dc84a8bd60d44090fa9a818ca9f86a2fe1958f8-8906573-images-thumbs&n=13" alt="Собака и Омега-3">
+                            <div class="image-caption">Омега-3 жирные кислоты необходимы для здоровья собаки на протяжении всей жизни</div>
+                        </div>
+
+                        <h2>Факт 1. Омега-3 улучшает состояние шерсти и кожи</h2>
+                        <p>Одним из первых признаков нехватки Омега-3 становится тусклая, ломкая шерсть и сухая, шелушащаяся кожа. Жирные кислоты помогают удерживать влагу в клетках кожи, уменьшают воспаление и зуд. Регулярное добавление Омега-3 в рацион делает шерсть блестящей, мягкой и густой. Особенно это заметно у собак с длинной шерстью и у питомцев, склонных к аллергическим дерматитам.</p>
+
+                        <h2>Факт 2. Поддерживает здоровье суставов</h2>
+                        <p>Омега-3 обладает мощными противовоспалительными свойствами. Для собак крупных пород, склонных к дисплазии тазобедренных суставов и артриту, это особенно важно. Жирные кислоты уменьшают воспаление в суставах, снижают боль и улучшают подвижность. Исследования показывают, что собаки с артритом, получающие добавки с Омега-3, двигаются активнее и реже хромают.</p>
+
+                        <div class="fact-box">
+                            <h4>Совет ветеринара</h4>
+                            <p>Для поддержки суставов выбирайте рыбий жир из дикой рыбы (лосось, сардины, анчоусы). Он содержит EPA и DHA — наиболее полезные формы Омега-3. Дозировку рассчитывайте исходя из веса собаки: примерно 20-30 мг EPA и DHA на 1 кг веса в день.</p>
+                        </div>
+
+                        <h2>Факт 3. Укрепляет иммунитет и сердце</h2>
+                        <p>Омега-3 положительно влияет на сердечно-сосудистую систему: снижает уровень триглицеридов, нормализует давление и уменьшает риск аритмий. Кроме того, жирные кислоты поддерживают работу иммунной системы, помогая организму бороться с инфекциями и снижая риск аутоиммунных заболеваний. Для пожилых собак Омега-3 особенно важна для профилактики возрастных заболеваний.</p>
+
+                        <h2>Факт 4. Помогает при аллергиях</h2>
+                        <p>Если ваша собака страдает от сезонной или пищевой аллергии, Омега-3 может стать отличным дополнением к основному лечению. Жирные кислоты уменьшают выработку провоспалительных веществ, снижают зуд, покраснение и отёки. Многие владельцы отмечают, что после курса Омега-3 собаки меньше чешутся и лучше переносят сезон обострения аллергии.</p>
+
+                        <h2>Факт 5. Поддерживает когнитивные функции у пожилых собак</h2>
+                        <p>С возрастом у собак может снижаться память, ухудшаться ориентация в пространстве и способность к обучению. Омега-3, особенно DHA, поддерживает здоровье мозга и замедляет возрастные изменения. Исследования показывают, что пожилые собаки, получающие добавки с Омега-3, дольше сохраняют ясность ума и активность.</p>
+
+                        <p>Омега-3 — это не панацея, но важный элемент здорового рациона. Лучшие натуральные источники: жирная рыба (лосось, скумбрия, сардины), рыбий жир, льняное масло (но оно усваивается хуже). Перед добавлением любых добавок обязательно проконсультируйтесь с ветеринаром — он поможет подобрать правильную дозировку и форму выпуска для вашего питомца.</p>
+                    <img src="https://pic.rtbcdn.ru/video/73/73/73735d97a7481b7d3022081a41f78a25.jpg?width=500" alt="Собака">
+                    <p><small> во что превратится ваша собака</small></p>
+</div>
+                </article>
+             </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3>PetsWorld</h3>
+                <p>Забота о питомцах с любовью с 2010 года.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><<a href="blog.html">Блог</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Соцсети</h4>
+                <div class="socials">
+                    <a href="#"><img src="https://images.icon-icons.com/808/PNG/512/vk_icon-icons.com_66102.png" alt="вк"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/2429/PNG/512/telegram_logo_icon_147228.png" alt="тг"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/1211/PNG/512/1491580635-yumminkysocialmedia26_83102.png" alt="инст"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>© <span class="current-year"></span> PetsWorld.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Текущий год
+        document.querySelector('.current-year').textContent = new Date().getFullYear();
+
+        // Корзина
+        let cartCount = 0;
+        const cartCounter = document.querySelector('.cart-count');
+        const cartIcon = document.querySelector('.cart-icon');
+
+        if (cartIcon) {
+            cartIcon.addEventListener('click', function() {
+                alert('Ваша корзина. Товаров: ' + cartCount);
+            });
+        }
+
+        // Бургер-меню
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                burgerBtn.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

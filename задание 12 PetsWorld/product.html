@@ -1,0 +1,799 @@
+_-<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корм Acana для собак - PetsWorld</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #F9F3E9;
+            color: #2C1810;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 20px;
+            gap: 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #C44536;
+            text-decoration: none;
+        }
+
+        .nav__list {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav__link {
+            text-decoration: none;
+            color: #2C1810;
+            font-weight: 600;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
+
+        .nav__link:hover, .nav__link.active {
+            color: #C44536;
+            border-bottom: 2px solid #C44536;
+        }
+
+        .header__actions {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .search {
+            padding: 8px 16px;
+            border: 1px solid #E8DCCC;
+            border-radius: 40px;
+            background: #FEFCF8;
+            outline: none;
+        }
+
+        .cart-icon {
+            cursor: pointer;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-icon-img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .cart-count {
+            background: #C44536;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            position: absolute;
+            top: -10px;
+            right: -12px;
+        }
+
+        /* Burger */
+        .burger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .burger span {
+            width: 28px;
+            height: 3px;
+            background: #2C1810;
+            border-radius: 3px;
+        }
+
+        .burger.active span {
+            background: #C44536;
+        }
+
+        /* Хлебные крошки */
+        .breadcrumbs {
+            padding: 20px 0;
+            font-size: 14px;
+        }
+
+        .breadcrumbs a {
+            color: #C44536;
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: #888;
+        }
+
+        /* Детальная страница товара */
+        .product-detail {
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin: 30px 0 60px;
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .product-gallery {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .product-gallery img {
+            width: 100%;
+            border-radius: 20px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .product-info h1 {
+            font-size: 32px;
+            color: #2C1810;
+            margin-bottom: 15px;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 5px;
+        }
+
+        .star-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .reviews-count {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: bold;
+            color: #C44536;
+            margin: 20px 0;
+        }
+
+        .stock {
+            color: #4CAF50;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .stock-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .btn--primary {
+            background: #C44536;
+            color: white;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .btn--primary:hover {
+            background: #A83527;
+            transform: translateY(-2px);
+        }
+
+        /* Вкладки */
+        .tabs {
+            display: flex;
+            gap: 5px;
+            border-bottom: 2px solid #F0E4D8;
+            margin: 30px 0 20px;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #888;
+            transition: 0.3s;
+            font-weight: 600;
+        }
+
+        .tab-btn.active {
+            color: #C44536;
+            border-bottom: 3px solid #C44536;
+            margin-bottom: -2px;
+        }
+
+        .tab-btn:hover {
+            color: #C44536;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 20px 0;
+            line-height: 1.7;
+            color: #5E4B3C;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .tab-content h3 {
+            color: #C44536;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .tab-content ul {
+            margin-left: 20px;
+        }
+
+        .tab-content li {
+            margin-bottom: 8px;
+        }
+
+        .chars-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .chars-table tr {
+            border-bottom: 1px solid #F0E4D8;
+        }
+
+        .chars-table td {
+            padding: 12px 0;
+        }
+
+        .chars-table td:first-child {
+            font-weight: bold;
+            width: 40%;
+            color: #2C1810;
+        }
+
+        .chars-table td:last-child {
+            color: #5E4B3C;
+        }
+
+        .review-card {
+            border-bottom: 1px solid #F0E4D8;
+            padding: 20px 0;
+        }
+
+        .review-card:last-child {
+            border-bottom: none;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #C44536;
+            margin-bottom: 8px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            color: #5E4B3C;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2C1810;
+            color: #F9F3E9;
+            padding: 50px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer__container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer__col h3, .footer__col h4 {
+            margin-bottom: 15px;
+            color: #C44536;
+        }
+
+        .footer__col ul {
+            list-style: none;
+        }
+
+        .footer__col li {
+            margin-bottom: 8px;
+        }
+
+        .footer__col a {
+            color: #F9F3E9;
+            text-decoration: none;
+        }
+
+        .footer__col a:hover {
+            color: #C44536;
+        }
+
+        .socials {
+            display: flex;
+            gap: 20px;
+        }
+
+        .socials a img {
+            width: 28px;
+            height: 28px;
+            transition: 0.3s;
+        }
+
+        .socials a img:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .footer__bottom {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid #5E4B3C;
+        }
+
+        /* Модальное окно корзины */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 400px;
+            width: 90%;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #C44536;
+        }
+
+        .modal-icon {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content h2 {
+            color: #C44536;
+            margin-bottom: 15px;
+        }
+
+        .modal-content p {
+            color: #5E4B3C;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            background: #C44536;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .modal-btn:hover {
+            background: #A83527;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .burger {
+                display: flex;
+            }
+
+            .nav {
+                display: none;
+                width: 100%;
+                order: 3;
+            }
+
+            .nav.active {
+                display: block;
+            }
+
+            .nav__list {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+                padding: 20px 0;
+            }
+
+            .header__actions {
+                order: 2;
+            }
+
+            .product-detail {
+                padding: 20px;
+            }
+
+            .product-info h1 {
+                font-size: 24px;
+            }
+
+            .price {
+                font-size: 28px;
+            }
+
+            .tab-btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header__container">
+            <a href="index.html" class="logo">PetsWorld</a>
+            
+            <button class="burger" id="burgerBtn">
+                <span></span><span></span><span></span>
+            </button>
+
+            <nav class="nav" id="navMenu">
+                <ul class="nav__list">
+                    <li><a href="index.html" class="nav__link">Главная</a></li>
+                    <li><a href="catalog.html" class="nav__link active">Каталог</a></li>
+                    <li><a href="blog.html" class="nav__link">Блог</a></li>
+                    <li><a href="contacts.html" class="nav__link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <div class="header__actions">
+                <input type="text" class="search" placeholder="Поиск...">
+                <div class="cart-icon">
+                    <img src="https://cdn-icons-png.flaticon.com/128/263/263142.png" alt="Корзина" class="cart-icon-img">
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumbs">
+                <a href="index.html">Главная</a> / 
+                <a href="catalog.html">Каталог</a> / 
+                <a href="catalog.html?cat=dogs">Для собак</a> / 
+                <span>Корм Purina Pro Plan для собак</span>
+            </div>
+            <div class="product-detail">
+                <div class="product-gallery">
+                    <img src="https://catalog-cdn.detmir.st/media/aWktOpiFCb6adSBLbhv0m4ICHG74hGkoEMifXSXX40c=.jpeg" alt="Корм  для собак">
+                </div>
+
+                <div class="product-info">
+                    <h1>Корм Purina Pro Plan для собак</h1>
+                    
+                    <div class="product-rating">
+                        <div class="stars">
+                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" alt="Звезда" class="star-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" alt="Звезда" class="star-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" alt="Звезда" class="star-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" alt="Звезда" class="star-icon">
+                            <img src="https://cdn-icons-png.flaticon.com/128/1828/1828884.png" alt="Звезда" class="star-icon">
+                        </div>
+                        <span class="reviews-count">3 отзыва</span>
+                    </div>
+
+                    <div class="stock">
+                        <img src="https://cdn-icons-png.flaticon.com/128/190/190411.png" alt="В наличии" class="stock-icon">
+                        В наличии
+                    </div>
+
+                    <p class="price">2 490 ₽</p>
+                    
+                    <button class="btn btn--primary add-to-cart">Добавить в корзину</button>
+
+                    <!-- Вкладки -->
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="desc">Описание</button>
+                        <button class="tab-btn" data-tab="chars">Характеристики</button>
+                        <button class="tab-btn" data-tab="reviews">Отзывы</button>
+                    </div>
+
+                    <div id="desc" class="tab-content active">
+                        <h3>О товаре</h3>
+                        <p>Purina Pro Plan — это полнорационный сухой корм премиум-класса для собак всех пород. Корм производится в Канаде из свежих местных ингредиентов. В составе преобладает мясо птицы, рыбы и яиц — до 75% от общего объёма. Без зерна, искусственных красителей и консервантов.</p>
+                        <p>Корм подходит для ежедневного кормления взрослых собак. Обеспечивает здоровье кожи и шерсти, поддерживает иммунитет и способствует правильному пищеварению.</p>
+                        <p><strong>Преимущества:</strong></p>
+                        <ul>
+                            <li>Высокое содержание мяса</li>
+                            <li>Беззерновая формула</li>
+                            <li>Подходит для чувствительного пищеварения</li>
+                            <li>Произведено в Канаде</li>
+                        </ul>
+                    </div>
+
+                    <div id="chars" class="tab-content">
+                        <h3>Характеристики</h3>
+                        <table class="chars-table">
+                            <tr>
+                                <td>Белки</td>
+                                <td>35%</td>
+                            </tr>
+                            <tr>
+                                <td>Жиры</td>
+                                <td>20%</td>
+                            </tr>
+                            <tr>
+                                <td>Клетчатка</td>
+                                <td>4%</td>
+                            </tr>
+                            <tr>
+                                <td>Влажность</td>
+                                <td>10%</td>
+                            </tr>
+                            <tr>
+                                <td>Вес упаковки</td>
+                                <td>2 кг</td>
+                            </tr>
+                            <tr>
+                                <td>Страна производства</td>
+                                <td>Канада</td>
+                            </tr>
+                            <tr>
+                                <td>Класс корма</td>
+                                <td>Супер-премиум</td>
+                            </tr>
+                            <tr>
+                                <td>Для кого</td>
+                                <td>Взрослые собаки всех пород</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div id="reviews" class="tab-content">
+                        <h3>Отзывы покупателей</h3>
+                        
+                        <div class="review-card">
+                            <div class="review-author">Анна С.</div>
+                            <div class="review-date">10 марта 2026</div>
+                            <div class="review-text">Отличный корм! Собака ест с удовольствием уже второй месяц. Шерсть стала блестящей, стул в норме. Рекомендую!</div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-author">Михаил К.</div>
+                            <div class="review-date">25 февраля 2026</div>
+                            <div class="review-text">Хороший состав, без зерна. Моему лабрадору очень нравится. Цена соответствует качеству.</div>
+                        </div>
+                        
+                        <div class="review-card">
+                            <div class="review-author">Елена В.</div>
+                            <div class="review-date">5 февраля 2026</div>
+                            <div class="review-text">Перешли на этот корм по совету ветеринара. У собаки была аллергия на курицу, этот корм подошёл идеально.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img src="https://cdn-icons-png.flaticon.com/128/190/190411.png" alt="Успех" class="modal-icon">
+            <h2>Товар добавлен</h2>
+            <p>Корм Purina Pro Plan для собак добавлен в корзину</p>
+            <button class="modal-btn" id="modalCloseBtn">Продолжить покупки</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__col">
+                <h3>PetsWorld</h3>
+                <p>Забота о питомцах с любовью с 2010 года.</p>
+            </div>
+            <div class="footer__col">
+                <h4>Разделы</h4>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="blog.html">Блог</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <h4>Соцсети</h4>
+                <div class="socials">
+                    <a href="#"><img src="https://images.icon-icons.com/808/PNG/512/vk_icon-icons.com_66102.png" alt="вк"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/2429/PNG/512/telegram_logo_icon_147228.png" alt="тг"></a>
+                    <a href="#"><img src="https://images.icon-icons.com/1211/PNG/512/1491580635-yumminkysocialmedia26_83102.png" alt="инст"></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer__bottom">
+            <p>© <span class="current-year"></span> PetsWorld.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Текущий год
+        document.querySelector('.current-year').textContent = new Date().getFullYear();
+
+        // Корзина
+        let cartCount = 0;
+        const cartCounter = document.querySelector('.cart-count');
+        const cartIcon = document.querySelector('.cart-icon');
+
+        // Модальное окно
+        const modal = document.getElementById('modal');
+        const modalCloseBtn = document.getElementById('modalCloseBtn');
+        const modalCloseSpan = document.querySelector('.modal-close');
+
+        function openModal() {
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        if (modalCloseBtn) {
+            modalCloseBtn.addEventListener('click', closeModal);
+        }
+        if (modalCloseSpan) {
+            modalCloseSpan.addEventListener('click', closeModal);
+        }
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Добавление в корзину
+        const addToCartBtn = document.querySelector('.add-to-cart');
+        if (addToCartBtn) {
+            addToCartBtn.addEventListener('click', function() {
+                cartCount++;
+                cartCounter.textContent = cartCount;
+                openModal();
+            });
+        }
+
+        // Клик по иконке корзины
+        if (cartIcon) {
+            cartIcon.addEventListener('click', function() {
+                alert('Ваша корзина. Товаров: ' + cartCount);
+            });
+        }
+
+        // Бургер-меню
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+        if (burgerBtn && navMenu) {
+            burgerBtn.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                burgerBtn.classList.toggle('active');
+            });
+        }
+
+        // Работа вкладок
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+                
+                // Убираем активный класс у всех кнопок
+                tabBtns.forEach(b => b.classList.remove('active'));
+                // Добавляем активный класс текущей кнопке
+                this.classList.add('active');
+                
+                // Скрываем все вкладки
+                tabContents.forEach(content => content.classList.remove('active'));
+                // Показываем нужную вкладку
+                const activeTab = document.getElementById(tabId);
+                if (activeTab) {
+                    activeTab.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
